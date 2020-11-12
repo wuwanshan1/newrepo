@@ -1,0 +1,258 @@
+:root {
+  --min-width: 360px;
+  --color-black: #222;
+  --base-font-family: 'SimHei';
+  --max-width: 1200px;
+
+  --base-padding: 10px;
+  --color-gray-light: #d1d1d1;
+  font-size: 12px;
+
+  --color-white: #f4f4f4;
+  --color-primary: #3184d1;
+  --color-primary-light: #a9d0f5;
+  --color-danger: #e90000;
+  --color-danger-light: #f5b5b5;
+}
+
+@media screen and (min-width: 600px) {
+  :root {
+    font-size: 14px;
+    --base-padding: 12px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  :root {
+    font-size: 16px;
+    --base-padding: 20px;
+  }
+}
+
+body {
+  margin: 0;
+  min-width: var(--min-width);
+  color: var(--color-black);
+  font-family: var(--base-font-family);
+}
+
+/* -----------布局----------- */
+.main-container {
+  max-width: var(--max-width);
+  display: grid;
+  grid-gap: var(--base-padding);
+  grid-template-columns: 1fr 3fr;
+  margin: 0 auto;
+  padding: 0 var(--base-padding);
+}
+
+@media screen and (min-width: 600px) {
+  .main-container {
+    grid-template-columns: 5fr 6fr;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .main-container {
+    grid-template-columns: 5fr 3fr;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+}
+
+/* -----------文本----------- */
+h1,
+h2,
+h3 {
+  font-weight: 200;
+  margin: 1rem auto;
+}
+
+p {
+  margin: 1rem auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* -----------商品----------- */
+.products {
+  display: grid;
+  grid-gap: var(--base-padding);
+  overflow: auto;
+}
+
+@media screen and (min-width: 600px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .products {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.product {
+  text-align: center;
+  padding: var(--base-padding);
+  border: 2px dashed var(--color-gray-light);
+}
+
+.product:hover {
+  border-style: solid;
+}
+
+.product-price:before {
+  content: '¥';
+}
+
+.product-image {
+  max-width: 65px;
+  transition: 0.3s all;
+  filter: drop-shadow(0px 0px 0px transparent);
+}
+
+@media screen and (min-width: 600px) {
+  .product-image {
+    max-width: 100px;
+  }
+}
+
+.product:hover .product-image {
+  animation: 0.5s shake-product-image;
+}
+
+@keyframes shake-product-image {
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+/* -----------购物车----------- */
+.cart {
+  display: grid;
+  grid-gap: var(--base-padding);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 2rem 6rem 3rem 2rem 1rem 2rem auto;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: var(--base-padding);
+  border: 2px dashed var(--color-gray-light);
+  animation: 0.3s add-cart-item;
+}
+
+@keyframes add-cart-item {
+  from {
+    margin-left: -200px;
+    margin-right: 200px;
+    opacity: 0;
+  }
+
+  to {
+    margin-left: 0;
+    margin-right: 0;
+    opacity: 1;
+  }
+}
+
+.cart-item-remove {
+  animation: 0.3s remove-cart-item;
+}
+
+@keyframes remove-cart-item {
+  to {
+    margin-left: 200px;
+    margin-right: -200px;
+    opacity: 0;
+  }
+}
+
+.cart-item-image {
+  max-width: 28px;
+}
+
+@media screen and (min-width: 600px) {
+  .cart-item-image {
+    max-width: 38.5px;
+  }
+}
+
+.cart h3 {
+  margin: 0;
+}
+
+.cart-item-price:before {
+  content: '¥';
+}
+
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--base-padding);
+}
+
+/* -----------Buttons----------- */
+button {
+  font-family: var(--base-font-family);
+  cursor: pointer;
+  font-size: 0.95rem;
+  border: none;
+}
+
+:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn {
+  padding: 0.65rem 1rem;
+  transition: 0.3s all;
+}
+
+.btn-small {
+  padding: 0.2rem 0.4rem;
+}
+
+.btn-primary {
+  color: var(--color-white);
+  background: var(--color-primary);
+}
+
+.btn-primary:hover:not(:disabled),
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 5px var(--color-primary-light);
+}
+
+.btn-danger {
+  color: var(--color-white);
+  background: var(--color-danger);
+}
+
+.btn-danger:hover:not(:disabled),
+.btn-danger:focus {
+  outline: none;
+  box-shadow: 0 0 0 5px var(--color-danger-light);
+}
